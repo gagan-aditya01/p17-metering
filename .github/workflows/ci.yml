@@ -1,0 +1,58 @@
+name: P17 Metering CI Workflow
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  backend-ci:
+    name: Backend CI (Node & Jest)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: 'p17-metering/backend/package-lock.json'
+
+      - name: Install Backend Dependencies
+        run: |
+          cd p17-metering/backend
+          npm ci
+
+      - name: Run Backend Integration Tests
+        run: |
+          cd p17-metering/backend
+          npm test
+
+  frontend-ci:
+    name: Frontend CI (Vite Build)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: 'p17-metering/frontend/package-lock.json'
+
+      - name: Install Frontend Dependencies
+        run: |
+          cd p17-metering/frontend
+          npm ci
+
+      - name: Build Frontend Application
+        run: |
+          cd p17-metering/frontend
+          npm run build
