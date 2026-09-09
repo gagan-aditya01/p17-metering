@@ -14,11 +14,11 @@
   ---
 
   [**Key Features**](#-key-features) •
-  [**Architecture**](#-system-architecture--event-pipeline) •
-  [**API Reference**](#-api-endpoints-reference) •
+  [**User Journey Flowchart**](#-1-end-to-end-user-journey--event-pipeline) •
+  [**Architecture Diagram**](#-2-architecture--technical-stack) •
   [**13-Module Matrix**](#-spec-13-module-compliance-matrix) •
-  [**Local Setup**](#-quick-start--local-setup) •
-  [**Swagger UI**](#-interactive-swagger-api-docs)
+  [**API Reference**](#-rest-api-endpoints-reference) •
+  [**Local Setup**](#-quick-start--local-setup)
 
 </div>
 
@@ -59,66 +59,35 @@ Traditional flat-rate monthly SaaS pricing breaks down in the era of Generative 
 
 ---
 
-## ⚡ Key Features & Capability Matrix
+## 🔄 1. End-to-End User Journey & Event Pipeline
 
-```
-       ┌────────────────────────────────────────────────────────────────────────┐
-       │                       P17 METERING PLATFORM CORE                       │
-       └──────────────────────────────────┬─────────────────────────────────────┘
-                                          │
-        ┌─────────────────────────────────┼─────────────────────────────────┐
-        │                                 │                                 │
-  ┌─────▼──────────┐              ┌───────▼────────┐              ┌─────────▼────────┐
-  │  REAL-TIME     │              │  DYNAMIC TIER  │              │   ENTITLEMENT    │
-  │  INGESTION     │              │ RATING ENGINE  │              │  GATING (402)    │
-  │  Via x-api-key │              │ Multi-Bracket  │              │  TTL Cache Gating│
-  └────────────────┘              └────────────────┘              └──────────────────┘
-        │                                 │                                 │
-        └─────────────────────────────────┼─────────────────────────────────┘
-                                          │
-        ┌─────────────────────────────────┼─────────────────────────────────┐
-        │                                 │                                 │
-  ┌─────▼──────────┐              ┌───────▼────────┐              ┌─────────▼────────┐
-  │ ATOMIC WALLET  │              │ REVENUE MRR    │              │ AUTOMATED PDF    │
-  │ LEDGER DEBITS  │              │ ANALYTICS      │              │ INVOICING        │
-  │ Safe $inc Ops  │              │ Executive Hub  │              │ Line-Item Logs   │
-  └────────────────┘              └────────────────┘              └──────────────────┘
-```
+The lifecycle below outlines the complete sequence from tenant authentication, plan provisioning, real-time usage ingestion, rating calculations, entitlement gating check, atomic wallet settlement, and automated period-end invoicing.
+
+![End-to-End User Journey Flowchart](docs/user_journey_flowchart.jpg)
+
+### Lifecycle Breakdown
+1. **User Authentication & Auth Service**: Developer signs up or logs in; backend issues signed JWT token containing user identity and role.
+2. **Plan Registry**: Admin creates tiered pricing rules (free token thresholds, overage rates per unit).
+3. **API Key Provisioning**: Onboards tenant customer and issues a secure `x-api-key`.
+4. **AI App Event Ingestion**: External AI service transmits consumption payload (`units: 15000`, `eventName: llm_tokens`) with `x-api-key`.
+5. **Rating Engine Calculation**: Rates incoming usage against active plan tiers, producing exact dollar values.
+6. **Entitlement Gating Check**: Evaluates Node-Cache TTL. If balance is `$0.00` and no subscription exists, returns **`HTTP 402 Payment Required`**.
+7. **Atomic Wallet Debit**: Executes atomic `$inc` debit on customer wallet balance and records transaction audit entry.
+8. **Period-End Invoicing & Dunning**: Aggregates usage fee line items and executes payment retry logic on past-due accounts.
 
 ---
 
-## 🏗️ System Architecture & Event Pipeline
+## 🏛️ 2. Architecture & Technical Stack
 
-```
-+-----------------------------------------------------------------------------------+
-|                                 CLIENT LAYERS                                     |
-|  +-----------------------------------+   +-------------------------------------+  |
-|  |   React 18 Web App (Admin/User)   |   |   AI Microservice / External API    |  |
-|  +-----------------------------------+   +-------------------------------------+  |
-+------------------|-----------------------------------|----------------------------+
-                   | JWT Bearer Token                  | x-api-key Header
-                   v                                   v
-+-----------------------------------------------------------------------------------+
-|                            EXPRESS BACKEND GATEWAY                                |
-|  +-----------------------------------------------------------------------------+  |
-|  | Security Pipeline: Helmet | Mongo Sanitize | CORS | Rate Limiter             |  |
-|  +-----------------------------------------------------------------------------+  |
-|  | Authentication & RBAC: verifyJWT | verifyApiKey | requireRole('admin')       |  |
-|  +-----------------------------------------------------------------------------+  |
-|  | Entitlement Gating Middleware: checkEntitlement (Node-Cache 30s TTL)         |  |
-|  +-----------------------------------------------------------------------------+  |
-|  | Business Logic Services: Rating Engine | Invoice Service | Dunning Service  |  |
-|  +-----------------------------------------------------------------------------+  |
-+------------------|-----------------------------------|----------------------------+
-                   |                                   |
-                   v                                   v
-+-----------------------------------------------------------------------------------+
-|                             PERSISTENCE & OBSERVABILITY                           |
-|  +------------------------------------+   +------------------------------------+  |
-|  | MongoDB Atlas (Mongoose ODM)       |   | Winston Structured JSON Logger     |  |
-|  +------------------------------------+   +------------------------------------+  |
-+-----------------------------------------------------------------------------------+
-```
+The layered architecture diagram details the separation of concerns across Client, Gateway, Service, and Data Persistence layers.
+
+![Node.js Express React SaaS Platform Architecture](docs/system_architecture_diagram.jpg)
+
+### Layer Responsibilities
+* **Layer 1 — Client Layer**: React 18 Single Page Application (Dashboard, Usage Telemetry, Wallet Ledger, Plans) & External AI Microservices calling API endpoints.
+* **Layer 2 — Express Gateway Layer**: Security pipeline (Helmet, Mongo Sanitize, Rate Limiter), Auth middleware (`verifyJWT`, `verifyApiKey`), and Entitlement Gating (`checkEntitlement` via Node-Cache 30s TTL).
+* **Layer 3 — Service Layer**: Rating Engine (`rating.service.js`), Invoice Engine (`invoice.service.js`), and Dunning Engine (`dunning.service.js`).
+* **Layer 4 — Persistence & Observability**: MongoDB Atlas Cluster (Indexed schemas) and Winston Structured JSON Logger.
 
 ---
 
