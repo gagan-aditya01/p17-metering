@@ -17,8 +17,8 @@
 | S.No | Student Name | Roll No / Registration No | Department | Section / Batch | Project Code |
 | :---: | :--- | :---: | :---: | :---: | :---: |
 | 1 | Gagan Aditya | 2261543 | B.Tech Computer Science & Engineering (AI & ML) | 5BTAIML | **P17** |
-| 2 | Hannah Johnson | 2261544 | B.Tech Computer Science & Engineering (AI & ML) | 5BTAIML | **P17** |
-| 3 | Jason Antony | 2261545 | B.Tech Computer Science & Engineering (AI & ML) | 5BTAIML | **P17** |
+| 2 | Hannah Johnson | 2463022 | B.Tech Computer Science & Engineering (AI & ML) | 5BTAIML | **P17** |
+| 3 | Jason Antony | 2463025 | B.Tech Computer Science & Engineering (AI & ML) | 5BTAIML | **P17** |
 | 4 | Hebba Benny | 2261546 | B.Tech Computer Science & Engineering (AI & ML) | 5BTAIML | **P17** |
 
 * **Course Name**: Advanced JavaScript Backend Frameworks (Node.js & Express JS)
