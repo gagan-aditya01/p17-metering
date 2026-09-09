@@ -5,9 +5,9 @@
 ## 📍 Slide 1: Title & Team Information
 * **Slide Title**: P17 Metering — SaaS Usage-Based Billing & AI Token Metering Platform
 * **Subtitle**: Advanced JavaScript Backend Frameworks (Node.js & Express JS) — CIA-3 Assessment
-* **Presenter**: Gagan Aditya (Roll No: 2261543)
+* **Presenters**: Gagan Aditya, Hannah Johnson, Jason Antony, Hebba Benny
 * **Department**: B.Tech Computer Science & Engineering (Artificial Intelligence & Machine Learning)
-* **Section / Batch**: 5-BTCS-A | Project Code: **P17**
+* **Section / Batch**: 5BTAIML | Project Code: **P17**
 * **Institution**: Christ University & L&T EduTech
 
 ---
