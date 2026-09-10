@@ -8,10 +8,10 @@
 
 | S.No | Student Name | Roll No / Reg No | Department | Section / Batch | Project Code |
 | :---: | :--- | :---: | :---: | :---: | :---: |
-| 1 | Gagan Aditya | 2261543 | B.Tech Computer Science & Engineering (AI & ML) | 5BTAIML | **P17** |
-| 2 | Hannah Johnson | 2463022 | B.Tech Computer Science & Engineering (AI & ML) | 5BTAIML | **P17** |
-| 3 | Jason Antony | 2463025 | B.Tech Computer Science & Engineering (AI & ML) | 5BTAIML | **P17** |
-| 4 | Hebba Benny | 2463024 | B.Tech Computer Science & Engineering (AI & ML) | 5BTAIML | **P17** |
+| 1 | G.Gagan Aditya | 2463020 | B.Tech in AIML | 5BTAIML | **P17** |
+| 2 | Hanna Johnson | 2463022 | B.Tech in AIML | 5BTAIML | **P17** |
+| 3 | Jason Antony - L | 2463025 | B.Tech in AIML | 5BTAIML | **P17** |
+| 4 | Heba Benny | 2463024 | B.Tech in AIML | 5BTAIML | **P17** |
 
 ---
 

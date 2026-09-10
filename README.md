@@ -28,7 +28,7 @@
 
 > **Continuous Internal Assessment 3 (CIA-3 Project Development)**  
 > **Course**: Advanced JavaScript Backend Frameworks (Node.js & Express JS)  
-> **Department**: Department of Computer Science & Engineering (Artificial Intelligence & Machine Learning)  
+> **Department**: B.Tech in AIML  
 > **Institution**: Christ University & L&T EduTech  
 > **Batch / Section**: 5BTAIML | **Project Code**: `P17`
 
@@ -36,10 +36,10 @@
 
 | S.No | Student Name | Registration No | Department | Section / Batch | Project Role |
 | :---: | :--- | :---: | :---: | :---: | :---: |
-| 1 | **Gagan Aditya** | `2261543` | B.Tech CSE (AI & ML) | `5BTAIML` | Lead Architect & Full-Stack Engineer |
-| 2 | **Hannah Johnson** | `2463022` | B.Tech CSE (AI & ML) | `5BTAIML` | Backend Engineer & Database Designer |
-| 3 | **Jason Antony** | `2463025` | B.Tech CSE (AI & ML) | `5BTAIML` | Frontend Engineer & UI Specialist |
-| 4 | **Hebba Benny** | `2463024` | B.Tech CSE (AI & ML) | `5BTAIML` | QA Engineer & API Test Automation |
+| 1 | **G.Gagan Aditya** | `2463020` | B.Tech in AIML | `5BTAIML` | Lead Architect & Full-Stack Engineer |
+| 2 | **Hanna Johnson** | `2463022` | B.Tech in AIML | `5BTAIML` | Backend Engineer & Database Designer |
+| 3 | **Jason Antony - L** | `2463025` | B.Tech in AIML | `5BTAIML` | Frontend Engineer & UI Specialist |
+| 4 | **Heba Benny** | `2463024` | B.Tech in AIML | `5BTAIML` | QA Engineer & API Test Automation |
 
 ---
 
